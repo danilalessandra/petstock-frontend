@@ -1,0 +1,16 @@
+/* frontend/src/index.css */
+
+/* Este archivo ahora debe estar vacío o contener solo estilos muy básicos. */
+/* Todas las variables globales y estilos base se han movido a GlobalStyles.css */
+
+/* body {
+  margin: 0;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */ /* Estas reglas ya están en GlobalStyles.css */
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
