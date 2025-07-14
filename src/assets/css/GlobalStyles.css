@@ -1,0 +1,380 @@
+/* frontend/src/assets/css/GlobalStyles.css */
+
+/* 1. Variables globales para paleta de colores (Modo Claro) */
+:root {
+    --color-bg: #f5f7fa;
+    --color-bg-glass: rgba(255, 255, 255, 0.75);
+    --color-primary: #6c63ff;
+    --color-primary-hover: #594de8; /* Nuevo: para botones hover */
+    --color-secondary: #1e2746;
+    --color-accent: #ffb366;
+    --color-text: #232946;
+    --color-text-light: #ffffff; /* Para texto sobre fondos oscuros (ej. botones) */
+    --color-border: #e0e6ed;
+    --color-shadow: rgba(44, 62, 80, 0.08);
+    --color-bg-header-table: #f2f2f2; /* Color de fondo para thead en modo claro */
+    --color-bg-table-row-odd: #ffffff; /* Fondo para filas impares en modo claro */
+    --color-bg-table-row-even: #f9f9f9; /* Fondo para filas pares en modo claro (sutilmente diferente) */
+    --color-bg-table-row-hover: #e0e0e0; /* Fondo para filas al pasar el ratón en modo claro */
+    --color-error-darker: #c0392b; /* Un rojo más oscuro para el hover del botón de eliminar */
+
+
+    /* Alerts */
+    --color-info: #2d9cdb;
+    --color-success: #27ae60;
+    --color-warning: #f2c94c;
+    --color-error: #eb5757;
+
+    /* Glassmorphism */
+    --glass-blur: 18px;
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+
+    /* Transiciones */
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Tipografía */
+    --font-main: 'Poppins', 'Roboto', Arial, sans-serif;
+
+    /* Tamaños (puedes mover estos de Dashboard.css si son globales) */
+    --border-radius: 1rem;
+    --spacing: 1rem;
+}
+
+/* 2. Modo oscuro (Aplicado con la clase 'dark' en el body) */
+body.dark {
+    --color-bg: #181a20;
+    --color-bg-glass: rgba(24, 26, 32, 0.85); /* Más opaco para modo oscuro */
+    --color-primary: #8f94fb;
+    --color-primary-hover: #6f74e8; /* Nuevo: para botones hover en oscuro */
+    --color-secondary: #CBD2D7; /* Gris claro para texto/títulos en oscuro (encabezados de tabla y generales) */
+    --color-accent: #ffb366; /* Puede seguir siendo el mismo */
+    --color-text: #E0E0E0; /* Color de texto general claro en modo oscuro (ligeramente más oscuro que blanco puro para evitar brillos) */
+    --color-text-light: #232946; /* Ahora es oscuro para texto sobre fondos claros en oscuro */
+    --color-border: #232946; /* Borde oscuro para modo oscuro */
+    --color-shadow: rgba(31, 38, 135, 0.22);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+    --color-bg-header-table: #2C2F36; /* Color de fondo para thead en modo oscuro (un gris más oscuro) */
+    --color-bg-table-row-odd: #1F2229; /* Fondo para filas impares en modo oscuro */
+    --color-bg-table-row-even: #252830; /* Fondo para filas pares en modo oscuro (sutilmente diferente) */
+    --color-bg-table-row-hover: #343840; /* Fondo para filas al pasar el ratón en modo oscuro */
+    --color-error-darker: #a72d21; /* Un rojo más oscuro para el hover del botón de eliminar en modo oscuro */
+}
+
+/* 3. Reset y base (estilos que aplican a todo el body/html) */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px; /* Asegura un tamaño base consistente */
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root { /* Asegura que #root también ocupe la altura completa */
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-text); /* Usa la variable de texto */
+    background-color: var(--color-bg); /* Usa la variable de fondo */
+    transition: background-color var(--transition), color var(--transition); /* Transiciones suaves */
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal innecesario */
+}
+
+/* *************************************************************** */
+/* NUEVA REGLA: Para eliminar el padding del sidebar en la página de login */
+/* *************************************************************** */
+body.login-page {
+    padding-left: 0 !important; /* Sobrescribe el padding del sidebar */
+}
+/* *************************************************************** */
+
+
+/* 4. Encabezados (global) */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--color-secondary); /* Los títulos cambian de color con el tema */
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    transition: color var(--transition);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* 5. Botones (global) */
+button, .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.8rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-text-light); /* Texto del botón que se adapta */
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--glass-shadow);
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    user-select: none;
+    text-align: center;
+}
+
+button:hover, .btn:hover,
+button:focus, .btn:focus {
+    background: var(--color-primary-hover);
+    outline: none;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 30px var(--color-shadow); /* Usa la variable de sombra */
+}
+
+/* Botones secundarios (global) */
+.btn-secondary {
+    background: var(--color-accent);
+    color: var(--color-text); /* Texto oscuro en botón secundario por defecto */
+    box-shadow: 0 4px 12px rgba(255, 179, 102, 0.3); /* Sombra fija o con variable */
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: #ff9f33; /* Un tono fijo o una nueva variable */
+    color: var(--color-text-light); /* Texto claro en hover */
+    box-shadow: 0 8px 24px rgba(255, 179, 102, 0.5);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Regla para forzar el color blanco en los iconos dentro de botones secundarios con la clase btn-icon */
+.btn-secondary.btn-icon svg {
+    color: var(--color-text-light); /* Fuerza el color blanco para el icono */
+    fill: var(--color-text-light); /* Asegura que el relleno del SVG sea blanco */
+}
+
+
+/* Estilo para botones de eliminar */
+.btn-danger {
+    background-color: var(--color-error); /* Usa la variable de error */
+    color: var(--color-text-light);
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: var(--color-error-darker); /* Usa la nueva variable para el color más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(235, 87, 87, 0.4);
+}
+
+/* Estilo para botones que contienen solo iconos */
+.btn-icon {
+    padding: 0.5rem; /* Menor padding para iconos */
+    width: 40px; /* Tamaño fijo para que sean cuadrados */
+    height: 40px; /* Tamaño fijo para que sean cuadrados */
+    font-size: 1.2rem; /* Tamaño del icono */
+    /* Asegura que el icono esté centrado si el botón es un flex container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Opcional: Si quieres que los botones de icono sean redondos */
+/* .btn-icon {
+    border-radius: 50%;
+} */
+
+
+/* 6. Inputs y formularios (global) */
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1.5px solid var(--color-border);
+    background: var(--color-bg-glass); /* Fondo que se adapta */
+    color: var(--color-text); /* Texto que se adapta */
+    font-size: 1rem;
+    box-shadow: var(--glass-shadow);
+    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition), color var(--transition);
+    outline-offset: 2px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.4);
+    outline: none;
+    background: var(--color-bg-glass); /* Asegura que el fondo no cambie */
+}
+
+/* 7. Tablas (global) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--color-text); /* Color general del texto de la tabla */
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente */
+}
+
+thead {
+    background: var(--color-bg-header-table);
+}
+
+thead th {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--color-border);
+    color: var(--color-secondary); /* Color del texto del encabezado de tabla */
+}
+
+tbody tr {
+    /* Fondo para filas impares */
+    background-color: var(--color-bg-table-row-odd);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition);
+}
+
+/* Estilo para filas pares para un efecto de cebra (zebra-striping) */
+tbody tr:nth-child(even) {
+    background-color: var(--color-bg-table-row-even);
+}
+
+
+tbody tr:hover {
+    background-color: var(--color-bg-table-row-hover); /* Color de hover para filas, que se adapta */
+}
+
+tbody td {
+    padding: 0.75rem 1rem;
+    color: var(--color-text); /* Texto de celda que se adapta */
+}
+
+/* 8. Alerts (global) */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    font-weight: 600;
+    box-shadow: var(--glass-shadow);
+    color: var(--color-text-light); /* Texto claro para alertas */
+    user-select: none;
+}
+
+.alert-info { background-color: var(--color-info); }
+.alert-success { background-color: var(--color-success); }
+.alert-warning {
+    background-color: var(--color-warning);
+    color: var(--color-text); /* Texto oscuro para alertas de warning */
+}
+.alert-error { background-color: var(--color-error); }
+
+/* 9. Scrollbar moderna (global) */
+::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-border); /* Usa la variable de borde que se adapta */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* 10. Enlaces (global) */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+a:hover {
+    color: var(--color-accent);
+}
+
+/* 11. Utilidades (global) */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+}
+
+/* Estilos para tablas responsivas (vista de tarjeta en móviles) */
+@media screen and (max-width: 768px) {
+    /* Oculta el thead en pantallas pequeñas */
+    .responsive-table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        box-shadow: var(--glass-shadow);
+        overflow: hidden; /* Para que el border-radius se aplique bien */
+    }
+
+    .responsive-table td {
+        display: flex; /* Usar flexbox para alinear etiqueta y contenido */
+        flex-direction: column; /* Apilar etiqueta y contenido verticalmente */
+        align-items: flex-start; /* Alinear al inicio (izquierda) */
+        text-align: left; /* Asegurar alineación de texto */
+        padding: 0.75rem 1rem; /* Padding uniforme */
+        position: relative;
+        border-bottom: 1px solid var(--color-border); /* Separador entre celdas */
+        word-break: break-word; /* Romper palabras largas */
+        white-space: normal; /* Asegura que el texto se envuelva */
+    }
+
+    /* Muestra la etiqueta del encabezado usando el atributo data-label */
+    .responsive-table td::before {
+        content: attr(data-label);
+        display: block; /* La etiqueta ocupa su propia línea */
+        font-weight: bold;
+        color: var(--color-secondary); /* Color del encabezado */
+        margin-bottom: 0.25rem; /* Espacio entre etiqueta y valor */
+        flex-shrink: 0; /* Evita que la etiqueta se encoja */
+    }
+
+    /* Ajuste para la última celda de cada fila (acciones) */
+    .responsive-table td:last-child {
+        border-bottom: 0; /* No hay borde inferior en la última celda */
+    }
+
+    /* Asegura que los botones de acción se mantengan flexibles y centrados */
+    .responsive-table td[data-label="Acciones"] {
+        flex-direction: row; /* Los botones deben estar en fila */
+        justify-content: center; /* Centra los botones */
+        align-items: center;
+        padding-left: 1rem; /* Ajusta el padding */
+        flex-wrap: wrap; /* Permite que los botones se envuelvan si hay muchos */
+        gap: 5px; /* Mantiene el espacio entre botones */
+    }
+
+    .responsive-table td[data-label="Acciones"]::before {
+        content: ""; /* Oculta la etiqueta "Acciones" en la vista de tarjeta */
+        display: none;
+    }
+}

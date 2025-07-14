@@ -1,0 +1,220 @@
+/* frontend/src/assets/css/Ventas.css */
+
+.ventas-container {
+    display: flex;
+    min-height: 100vh; /* Asegura que ocupe al menos la altura de la ventana */
+}
+
+.ventas-main-content {
+    flex-grow: 1; /* Permite que el contenido principal ocupe el espacio restante */
+    padding: 2rem;
+    background-color: var(--color-bg-light); /* o tu color de fondo principal */
+    color: var(--color-text);
+    transition: background-color var(--transition), color var(--transition); /* Transiciones de tema */
+    margin-left: 0; /* Ajusta en móvil */
+}
+
+/* Ajuste para el contenido principal cuando el sidebar está fijo en desktop */
+@media (min-width: 769px) {
+    .ventas-main-content {
+        margin-left: 340px; /* Ancho del sidebar en desktop */
+    }
+}
+
+
+.ventas-main-content h2,
+.ventas-main-content h3 {
+    color: var(--color-heading);
+    margin-bottom: 1rem;
+}
+
+.ventas-main-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Estilos para las pestañas (similar a Reportes.css) */
+.tabs-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+}
+
+.tab-button {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition);
+    font-weight: 500;
+}
+
+.tab-button:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary-light);
+}
+
+.tab-button.active {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    font-weight: 600;
+    background-color: var(--color-bg-glass-light); /* Un ligero fondo para la pestaña activa */
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm); /* Pequeña sombra para realzar */
+}
+
+.ventas-content-area {
+    background-color: var(--color-bg-card); /* Color de fondo para el área de contenido */
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    color: var(--color-text);
+}
+
+/* Estilos específicos para RegistrarVenta y HistorialVentas dentro de esta área */
+.register-sale-form .form-section,
+.sales-history {
+    margin-bottom: 1.5rem;
+}
+
+.register-sale-form .form-section h4 {
+    color: var(--color-secondary);
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+}
+
+/* Estilos para inputs */
+.register-sale-form input[type="text"],
+.register-sale-form input[type="number"],
+.register-sale-form input[type="date"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    font-size: 1rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.register-sale-form input[type="text"]:focus,
+.register-sale-form input[type="number"]:focus,
+.register-sale-form input[type="date"]:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.2);
+}
+
+.register-sale-form .product-input-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.register-sale-form .product-input-row input {
+    flex: 1; /* Permite que los inputs se expandan */
+    margin-bottom: 0; /* Elimina margen inferior extra */
+}
+
+.register-sale-form .add-product-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.register-sale-form .add-product-button:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.register-sale-form .total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.register-sale-form .total-section h3 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.8rem;
+}
+
+.register-sale-form .register-button {
+    padding: 1rem 2rem;
+    background-color: var(--color-success);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: background-color var(--transition), transform var(--transition);
+    box-shadow: var(--button-shadow);
+}
+
+.register-sale-form .register-button:hover {
+    background-color: var(--color-success-dark);
+    transform: translateY(-2px);
+}
+
+
+/* Estilos para tablas (HistorialVentas) */
+.sales-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background-color: var(--color-bg-table);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden; /* Para que los bordes redondeados se apliquen a los thead/tbody */
+}
+
+.sales-history thead {
+    background-color: var(--color-bg-table-header);
+    color: var(--color-text-light);
+}
+
+.sales-history th,
+.sales-history td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sales-history tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.sales-history tbody tr:hover {
+    background-color: var(--color-bg-table-hover);
+}
+
+.sales-history .view-details-button {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background-color var(--transition);
+}
+
+.sales-history .view-details-button:hover {
+    background-color: var(--color-secondary-dark);
+}

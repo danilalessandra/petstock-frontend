@@ -1,0 +1,335 @@
+/* frontend/src/assets/css/Sidebar.css */
+
+/*
+    *** IMPORTANTE ***
+    Asegúrate de que el bloque :root {} NO ESTÉ DUPLICADO aquí.
+    Las variables deben venir de GlobalStyles.css o un archivo similar que las defina globalmente.
+    Este archivo SÓLO debe contener las reglas CSS específicas para el sidebar.
+*/
+
+/* Tema Oscuro (ejemplo: si quieres overrides específicos para el sidebar en modo oscuro) */
+body.dark .sidebar,
+[data-theme='dark'] .sidebar {
+    /* Aquí puedes poner overrides de color específicos para el sidebar en modo oscuro */
+    /* Ejemplo: */
+    /* background-color: rgba(44, 62, 80, 0.85); */
+    /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25); */
+}
+
+/* Sidebar base */
+.sidebar {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 0; /* Por defecto oculto en móviles, se abrirá con JS */
+    background-color: var(--color-bg-glass); /* Esta variable debería ser blanca en tema claro de GlobalStyles.css */
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    overflow-y: auto; /* Asegura el scroll vertical si el contenido excede la altura */
+    overflow-x: hidden; /* Evitar scroll horizontal */
+    transition: width var(--transition), background-color var(--transition), box-shadow var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+    position: fixed; /* Mantenemos fijo para que 100vh funcione */
+    z-index: 1000; /* Asegura que esté por encima del contenido principal, especialmente en móvil */
+
+    /* Estilo para el scrollbar */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--color-primary) var(--color-bg-glass-dark); /* Color del "pulgar" y la pista */
+}
+
+/* Estilo para el scrollbar en WebKit (Chrome, Safari) */
+.sidebar::-webkit-scrollbar {
+    width: 8px; /* Ancho del scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: var(--color-bg-glass-dark); /* Color de la pista */
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary); /* Color del "pulgar" */
+    border-radius: 10px;
+    border: 2px solid var(--color-bg-glass-dark); /* Borde para el pulgar */
+}
+
+
+/* Cuando el sidebar está abierto (usado en móvil) */
+.sidebar.open {
+    width: 300px; /* Ancho para móvil */
+}
+
+/* ***************************************************
+    *** SE ELIMINÓ EL BLOQUE .sidebar.open::after ***
+    *** YA NO HABRÁ OVERLAY GRIS EN MÓVIL           ***
+    ***************************************************
+*/
+
+
+/* Estilos del header del sidebar */
+.sidebar-header {
+    padding: 0 1.5rem 1rem;
+    color: var(--color-primary);
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos de navegación del sidebar */
+.sidebar-nav {
+    flex-grow: 1;
+    padding: 0 1rem;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo para los NavLink y el contenedor del elemento padre desplegable */
+.sidebar-nav a,
+.parent-menu-item .link-wrapper { /* Aplica a ambos el estilo base de enlace */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color var(--transition), color var(--transition);
+    cursor: pointer; /* Indica que es clickeable para el parent-menu-item */
+    width: 100%; /* Asegura que ocupe el ancho completo dentro del li */
+    box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+.sidebar-nav a .icon,
+.parent-menu-item .link-wrapper .icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.sidebar-nav a:hover,
+.parent-menu-item .link-wrapper:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+/* Estilo para el enlace activo */
+.sidebar-nav a.active-link {
+    background-color: var(--color-primary) !important; /* !important para asegurar la prevalencia */
+    color: var(--color-text-light) !important;
+    font-weight: 600;
+}
+
+.sidebar-nav a.active-link .icon {
+    color: var(--color-text-light);
+}
+
+.menu-category {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+}
+
+/* --- Estilos para el submenú --- */
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0; /* Oculta por defecto */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out; /* Transición suave para abrir/cerrar */
+    background-color: var(--color-bg-glass-dark); /* Un fondo un poco más oscuro o diferente para el submenú */
+    border-radius: var(--border-radius-sm);
+    margin-top: 0.25rem; /* Pequeño espacio con el elemento padre */
+    margin-left: 0.5rem; /* Pequeña indentación del submenú completo */
+}
+
+.submenu.active {
+    max-height: 200px; /* Altura suficiente para mostrar los ítems. Ajustar si tienes muchos más. */
+    /* Puedes calcular esta altura dinámicamente con JS si es muy variable */
+}
+
+.submenu li {
+    margin-bottom: 0; /* Elimina el margen inferior entre ítems del submenú */
+}
+
+.submenu a {
+    padding: 0.6rem 1rem 0.6rem 2.5rem; /* Ajusta el padding para indentar los sub-ítems y alinear con el icono del padre */
+    font-size: 0.95rem; /* Un poco más pequeño que el principal */
+    color: var(--color-text); /* Color normal para los enlaces del submenú */
+    gap: 0.5rem; /* Espacio entre icono y texto si hubiera iconos en submenú */
+}
+
+.submenu a:hover {
+    background-color: var(--color-primary-light); /* Un color de hover más suave para el submenú */
+    color: var(--color-text-light);
+}
+
+.submenu a.active-link {
+    background-color: var(--color-primary) !important; /* Mismo color activo que el principal, o uno ligeramente diferente */
+    color: var(--color-text-light) !important;
+    font-weight: 600;
+}
+
+/* Flecha desplegable */
+.dropdown-arrow {
+    margin-left: auto; /* Empuja la flecha a la derecha */
+    display: flex; /* Para centrar la flecha verticalmente */
+    align-items: center;
+    transition: transform 0.3s ease;
+    font-size: 1.2rem; /* Tamaño del icono de la flecha */
+}
+
+/* Rota la flecha cuando el menú padre está abierto */
+.parent-menu-item.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* Botón de cambio de tema */
+.theme-toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: calc(100% - 2rem); /* 100% - padding lateral total (1rem a cada lado) */
+    margin: 1rem auto; /* Centra el botón horizontalmente */
+    padding: 0.8rem 1rem;
+    background-color: var(--color-accent);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color var(--transition), transform var(--transition);
+    box-shadow: var(--button-shadow);
+}
+
+.theme-toggle-button:hover {
+    background-color: var(--color-accent-dark);
+    transform: translateY(-2px);
+}
+
+/* Footer del sidebar */
+.sidebar-footer {
+    padding: 1rem 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: auto; /* Empuja el footer al final, aprovechando flex-grow en .sidebar-nav */
+    flex-shrink: 0;
+}
+
+.logout-button {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    /* Colores fijos para asegurar visibilidad y un look de "peligro" */
+    background-color: #dc3545; /* Un rojo estándar de peligro */
+    color: #ffffff; /* Blanco puro para el texto */
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color var(--transition), transform var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--button-shadow);
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Un rojo ligeramente más oscuro para el hover */
+    transform: translateY(-2px);
+}
+
+/* Botón hamburguesa (para móvil) */
+.hamburger {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001; /* Asegura que esté sobre el sidebar cuando se abre */
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    cursor: pointer;
+    display: none; /* Oculto por defecto, visible solo en móvil */
+    transition: background-color var(--transition);
+    box-shadow: var(--button-shadow);
+}
+
+.hamburger:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Media Queries */
+@media (min-width: 769px) {
+    .sidebar {
+        width: 340px; /* Ancho en desktop */
+        position: fixed; /* Mantenemos fixed para que 100vh funcione y se fije al viewport */
+        height: 100vh; /* Aseguramos que ocupe toda la altura del viewport */
+        z-index: 999; /* Bajamos el z-index un poco para que no tape elementos críticos si los hay, pero sigue alto */
+        box-shadow: var(--glass-shadow); /* Sombra en desktop */
+    }
+
+    /* Importantísimo: para evitar que el sidebar tape el contenido,
+       el contenido principal debe tener un margen o padding a la izquierda
+       igual al ancho del sidebar. */
+    body {
+        padding-left: 340px; /* Ancho del sidebar en desktop */
+    }
+
+    .hamburger {
+        display: none; /* Oculta el botón hamburguesa en desktop */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed; /* Fijo en móvil para el efecto de superposición */
+        width: 0; /* Oculto por defecto en móvil */
+        z-index: 1000; /* Asegura que esté encima del contenido */
+        box-shadow: none; /* Sin sombra cuando está cerrado en móvil */
+    }
+    .sidebar.open {
+        width: 300px; /* Ancho cuando está abierto en móvil */
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25); /* Sombra cuando está abierto en móvil */
+    }
+    .hamburger {
+        display: block; /* Muestra el botón hamburguesa en móvil */
+    }
+
+    /* En móvil, no necesitamos padding a la izquierda porque el sidebar se superpone */
+    body {
+        padding-left: 0;
+    }
+}

@@ -1,0 +1,269 @@
+/* -----------------------------------------------------
+    Pet Stock - Estilos Modernos con Glassmorphism
+    Paleta elegante, modo claro/oscuro, responsive
+    Tipografía: Poppins
+----------------------------------------------------- */
+
+/* 1. Variables globales para paleta de colores - ELIMINADAS (USAR GlobalStyles.css) */
+/* 2. Modo oscuro - ELIMINADO (USAR GlobalStyles.css) */
+
+/* 3. Reset y base - ELIMINADO (USAR GlobalStyles.css) */
+
+
+/* 4. Fondo de la página login */
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1400&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Overlay semitransparente sobre la imagen de fondo */
+.login-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.brand-header,
+.login-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* 5. Encabezados - ELIMINADO (USAR GlobalStyles.css) */
+/* h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-secondary);
+  margin-top: 0;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; } */
+
+/* 6. Logo y nombre de la tienda arriba */
+.brand-header {
+  width: 100%;
+  max-width: 400px;
+  margin: 3rem auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  user-select: none;
+  background: var(--color-bg-glass); /* Ahora usa la variable global */
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 16px 0 var(--color-shadow);
+  padding: 1.2rem 2rem 1.2rem 1.2rem;
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--color-border);
+  transition: background var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.paw-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 60%, var(--color-accent) 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px 0 var(--color-shadow);
+  padding: 0.5rem;
+  color: white;
+}
+
+.paw-logo svg {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.brand-title {
+  font-family: var(--font-main);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+  text-shadow: 0 2px 8px rgba(44,62,80,0.08);
+  margin-left: 0.3rem;
+  text-transform: lowercase;
+  transition: color var(--transition);
+}
+
+/* 7. Contenedor principal del login */
+.login-container {
+  max-width: 400px;
+  margin: 0 auto 4rem auto;
+  padding: 2.5rem 2rem;
+  background: var(--color-bg-glass);
+  border-radius: 1.5rem;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-form label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  color: var(--color-secondary);
+  letter-spacing: 0.01em;
+}
+
+/* Inputs, select, textarea - estos estilos ya están en GlobalStyles.css,
+   solo se mantienen si hay una sobrescritura específica para login */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  /* El background y color se toman de GlobalStyles.css */
+  margin-top: 0.25rem; /* Margen específico de este formulario */
+}
+
+.login-form input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* Botones - ELIMINADO (USAR GlobalStyles.css) */
+/* button,
+.btn {
+  padding: 0.85rem 2.2rem;
+  background: linear-gradient(90deg, var(--color-primary) 70%, var(--color-accent) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 var(--color-shadow);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  margin-top: 1.5rem;
+  letter-spacing: 0.03em;
+}
+
+button:hover,
+.btn:hover,
+button:focus {
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 18px 0 var(--color-shadow);
+  outline: none;
+} */
+
+/* Error message */
+.error-message {
+  color: var(--color-error);
+  background: rgba(235, 87, 87, 0.09);
+  border-radius: 0.7rem;
+  padding: 0.7rem 1rem;
+  margin-top: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-container {
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+  }
+  .login-form input,
+  button { /* Asegúrate que 'button' aquí no sobrescriba el padding si ya lo tienes global */
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+  .brand-header {
+    max-width: 95vw;
+    padding: 0.7rem;
+    gap: 0.7rem;
+  }
+  .brand-title {
+    font-size: 1.4rem;
+  }
+  .paw-logo svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Scrollbar moderna - ELIMINADO (USAR GlobalStyles.css) */
+/* ::-webkit-scrollbar { ... } */
+
+/* Selección de texto - ELIMINADO (USAR GlobalStyles.css) */
+/* ::selection { ... } */
+
+/* Enlaces - ELIMINADO (USAR GlobalStyles.css) */
+/* a { ... } */
+
+
+.login-container,
+.login-container * {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* --- ESTILOS PARA EL BOTÓN DE MOSTRAR/OCULTAR CONTRASEÑA --- */
+.password-input-container {
+  position: relative;
+  /* El margin-top ya lo tienes en el JS, puedes dejarlo o moverlo aquí si prefieres */
+  /* margin-top: 1rem; */
+}
+
+.password-toggle-button {
+  position: absolute;
+  right: 10px; /* Distancia desde el borde derecho del input */
+  top: 50%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajuste fino para centrado vertical */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-secondary); /* Color del icono, usa tu variable de color de texto */
+  font-size: 1.2rem; /* Tamaño del icono */
+  display: flex; /* Para asegurar que el icono SVG/componente se alinee bien */
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition); /* Transición para el color del icono */
+}
+
+.password-toggle-button:hover {
+  color: var(--color-primary); /* Cambia de color al pasar el ratón */
+}
+
+/* Ajustar el padding del input para que el texto no se solape con el icono */
+.password-input-container input[type="password"],
+.password-input-container input[type="text"] {
+  padding-right: 2.5rem; /* Deja espacio para el icono, ajusta si tu icono es más grande */
+}
+
+/* Estilos para modo oscuro para el botón de visibilidad - ELIMINADO (manejo con var) */
+/* @media (prefers-color-scheme: dark) { ... } */
+
+/*
+  Para los otros formularios (RegistrarUsuario, EditarUsuario) que no usan Login.css
+  y que actualmente usan estilos en línea, te recomiendo crear un archivo
+  `frontend/src/assets/css/Forms.css` y mover los estilos comunes de formulario
+  y las reglas de .password-input-container y .password-toggle-button allí.
+  Luego, importa `Forms.css` en `RegistrarUsuario.js` y `EditarUsuario.js`.
+*/

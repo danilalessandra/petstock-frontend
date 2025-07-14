@@ -1,0 +1,221 @@
+/* frontend/src/assets/css/Dashboard.css */
+
+/*
+    *** IMPORTANTE ***
+    Asegúrate de que el bloque :root {} NO ESTÉ DUPLICADO aquí.
+    Las variables deben venir de GlobalStyles.css
+*/
+
+/* 6. Tarjetas (específicas de Dashboard, pero usando variables globales) */
+.card {
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  padding: var(--spacing);
+  transition: box-shadow var(--transition);
+  color: var(--color-text);
+}
+
+.card:hover,
+.card:focus-within {
+  box-shadow: 0 12px 40px var(--color-shadow); /* Usar variable de sombra */
+  outline: none;
+}
+
+/* 7. Layout Dashboard */
+.dashboard-container {
+  display: flex; /* Esto es CLAVE para que sidebar y main se pongan lado a lado */
+  min-height: 100vh;
+  background-color: var(--color-bg); /* Usa la variable global */
+  transition: background-color var(--transition);
+  /* ELIMINADO: margin-left: 340px; u otros. Flexbox lo manejará. */
+}
+
+.dashboard-main {
+  flex-grow: 1; /* CLAVE: El main tomará todo el espacio restante */
+  padding: 2rem 3rem; /* Padding interno para el contenido */
+  max-width: 1400px; /* Un ancho máximo para que el contenido no se estire demasiado */
+  margin: 0 auto; /* Centra el contenido si hay espacio extra después del max-width */
+  overflow-y: auto; /* Permite el scroll si el contenido es muy largo */
+  outline: none;
+  background-color: var(--color-bg); /* Asegura que el main se adapte */
+  color: var(--color-text); /* Asegura que el texto se adapte */
+  transition: background-color var(--transition), color var(--transition);
+  box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
+
+  /* Asegurarse de que no haya un margen izquierdo fijo que cause problemas */
+  margin-left: 0;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.quick-access {
+  margin-bottom: 3rem;
+}
+
+.quick-access h2 {
+  margin-bottom: 1rem;
+  color: var(--color-secondary);
+}
+
+.quick-access-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.quick-access-card {
+  background: var(--color-bg-glass);
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
+  user-select: none;
+  text-align: center;
+}
+
+.quick-access-card:hover,
+.quick-access-card:focus {
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  box-shadow: 0 12px 40px var(--color-shadow); /* Usar variable de sombra */
+  transform: translateY(-4px);
+  outline: none;
+}
+
+.quick-access-card:hover .icon-wrapper,
+.quick-access-card:focus .icon-wrapper {
+  color: var(--color-text-light);
+}
+
+.icon-wrapper {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  transition: color var(--transition);
+}
+
+/* 8. Estadísticas */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.stat-card {
+  background: var(--color-bg-glass);
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-text);
+  transition: box-shadow var(--transition);
+  cursor: default;
+}
+
+.stat-card:focus {
+  outline: 3px solid var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-primary);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.stat-info h3 {
+  margin: 0 0 0.25rem 0;
+  font-weight: 700;
+  color: var(--color-secondary);
+  font-size: 1.2rem;
+}
+
+.stat-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+/* 12. Responsive */
+@media (max-width: 1200px) {
+  .dashboard-main {
+    padding: 2rem 2.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-main {
+    padding: 1.5rem 2rem;
+  }
+
+  .quick-access-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .stats-section {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    /* En móvil, el sidebar es fijo y se superpone, así que el main ocupa todo el ancho */
+    padding: 1.5rem 1.5rem;
+  }
+  .quick-access-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  .stats-section {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-main {
+    padding: 1rem 1rem;
+  }
+
+  .quick-access-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stats-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

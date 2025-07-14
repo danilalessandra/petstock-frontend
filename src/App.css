@@ -1,0 +1,15 @@
+/* frontend/src/App.css */
+
+/* Este archivo ahora debe estar vacío o contener solo estilos específicos para el componente App. */
+/* Todas las variables globales y estilos base se han movido a GlobalStyles.css */
+
+.App {
+  /* Si tu componente App tiene estilos específicos, ponlos aquí */
+  text-align: center; /* Ejemplo: si App centra su contenido */
+}
+
+/* Si usas App-logo o App-header en App.js, mueve sus estilos aquí,
+   pero asegúrate de que usen las variables de GlobalStyles.css */
+/* .App-logo { ... } */
+/* .App-header { ... } */
+/* @keyframes App-logo-spin { ... } */
